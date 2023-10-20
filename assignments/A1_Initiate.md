@@ -23,7 +23,6 @@ To create a dataset, use a similar method as in [this paper](https://arxiv.org/p
 - Light settings
 - Size
 - Rotation
-- Angle
 
 If all of these make sense to use and lead to an improvement will be seen during the evaluation of the trained models.
 

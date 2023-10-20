@@ -3,79 +3,55 @@ from pathlib import Path
 import os
 import numpy as np
 
-def crop_image(img):
+
+
+def find_edges(img):
     grayscale = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    _, thresholded = cv.threshold(grayscale,0,255,cv.THRESH_OTSU)
-    kernel = np.ones((3,3), np.uint8)
-    img_eroded = cv.erode(thresholded, kernel)
-    x, y, w, h = cv.boundingRect(img_eroded)
-    cropped_img = img[y:y+h, x:x+w]
+    blurred_img = cv.GaussianBlur(grayscale.copy(),(3,3),0)
+    edged_img = cv.Canny(blurred_img,50,100)
+    return edged_img
+
+def create_mask(img):
+    edged_img = find_edges(img)
+    contours,_ = cv.findContours(edged_img.copy(),cv.RETR_LIST,cv.CHAIN_APPROX_NONE)
+    filled_card = cv.fillPoly(edged_img.copy(), [max(contours, key = cv.contourArea)], color = (255, 255, 255))
+    _, mask = cv.threshold(filled_card, thresh= 180, maxval = 255, type = cv.THRESH_BINARY)
+    kernel = np.ones((5,5), np.uint8)
+    eroded_mask = cv.erode(mask, kernel)
+    return eroded_mask
+
+
+def crop_image(img):
+    img = cv.resize(img, (500, 600))
+    mask = create_mask(img)
+    img = cv.bitwise_and(img, img, mask = mask)
+    x, y, w, h = cv.boundingRect(mask)    
+    cropped_img = img[y-5:y+h+5, x-5:x+w+5]
+
+    
     return cropped_img
 
 
-def save_image(input_video_path, output_folder, card, counter):
-    video_name_without_extension = input_video_path.split('/')[-1].split('.')[0]
-    cv.imwrite(output_folder + '/' +  video_name_without_extension + f'_{counter}.jpg', card)
+def save_image(input_photo_path, output_folder, card):
+    photo_name_without_extension = input_photo_path.split('/')[-1].split('.')[0]
+    cv.imwrite(output_folder + '/' +  photo_name_without_extension + '.jpg', card)
 
 
-def create_playing_card_dir(VIDEO_DIR):
-    PLAYING_CARDS_DIR = VIDEO_DIR + '_processed'
+def create_playing_card_dir(photo_DIR):
+    PLAYING_CARDS_DIR = photo_DIR + '_processed'
     if not os.path.exists(PLAYING_CARDS_DIR):
         os.makedirs(PLAYING_CARDS_DIR)
     return PLAYING_CARDS_DIR
 
 
-def get_brightness_score(frame):
-    grayscale = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-    score = np.mean(grayscale)
-    #todo: richtige schranke
-    #print(np.max(grayscale))
-    #print(score)
-    return score
+def process_photos(PHOTOS_DIR):
+    PLAYING_CARDS_DIR = create_playing_card_dir(PHOTOS_DIR)
+    photo_paths = [str(path) for path in Path(PHOTOS_DIR).glob('*')]
 
-
-def brightness_change(current_frame, old_frame):
-    brightness_current_frame = get_brightness_score(current_frame)
-    brightness_old_frame = get_brightness_score(old_frame)
-    if abs(brightness_current_frame - brightness_old_frame) > 30:
-        has_changed = True
-    else:
-        has_changed = False
-    return has_changed
-
-
-def get_frame(video, frame_count):
-    video.set(cv.CAP_PROP_POS_FRAMES, frame_count)
-    _, frame = video.read()
-    return frame
-
-
-def get_relevant_frames_from_video(video_path):
-    frames = list()
-    video = cv.VideoCapture(video_path)
-    fps = video.get(cv.CAP_PROP_FPS)
-    total_frame_count = video.get(cv.CAP_PROP_FRAME_COUNT)
-
-    old_frame = get_frame(video, 0)
-    current_frame_count = fps
-    while current_frame_count < total_frame_count:
-        current_frame = get_frame(video, current_frame_count)
-        if brightness_change(current_frame, old_frame):
-            frames.append(current_frame)
-        old_frame = current_frame
-        current_frame_count += fps
-    return frames
-
-
-def process_videos(VIDEOS_DIR):
-    PLAYING_CARDS_DIR = create_playing_card_dir(VIDEOS_DIR)
-    video_paths = [str(path) for path in Path(VIDEOS_DIR).glob('*')]
-
-    for video_path in video_paths:
-        frames = get_relevant_frames_from_video(video_path)
-        for i, frame in enumerate(frames):
-            card = crop_image(frame)
-            save_image(video_path, PLAYING_CARDS_DIR, card, i)
+    for photo_path in photo_paths:
+            photo = cv.imread(photo_path)
+            card = crop_image(photo)
+            save_image(photo_path, PLAYING_CARDS_DIR, card)
 
     print(f'Processed cards saved at: ' + PLAYING_CARDS_DIR)
     return PLAYING_CARDS_DIR
@@ -84,10 +60,10 @@ def process_videos(VIDEOS_DIR):
 
 if __name__ == '__main__':
     # input parameters
-    VIDEOS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/sg_cards'
+    PHOTOS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/sg_card_photos'
 
     # do processing
-    PLAYING_CARD_DIR = process_videos(VIDEOS_DIR)
+    PLAYING_CARD_DIR = process_photos(PHOTOS_DIR)
     
 
 
