@@ -59,9 +59,11 @@ def generate_yaml_file(PLAYING_CARDS_DIR, OUTPUT_DIR):
     unique_card_names = list(set(card_names))
     unique_card_names.sort()
     classes_dict = dict((name, i) for i, name in enumerate(unique_card_names))
-    number_of_classes = len(unique_card_names)
 
     with open(OUTPUT_DIR + '/data.yaml', 'w') as file:
+        file.write(f'path: {OUTPUT_DIR}\n')
+        file.write('train: train/images\n')
+        file.write('val: val/images\n')
         file.write('names:\n')
         for i, card_name in enumerate(unique_card_names):
             file.write(f'  {i}: {card_name}\n')
@@ -75,7 +77,7 @@ def select_background(BACKGROUNDS_DIR):
     try:
         cropped_background = cv.resize(background, (640,640))
     except:
-        print(selected_background_path)
+        #print(selected_background_path)
         cropped_background = select_background(BACKGROUNDS_DIR)
     return cropped_background
 
@@ -249,9 +251,9 @@ if __name__ == '__main__':
     #input parameters
     BACKGROUNDS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/dtd'
     PLAYING_CARDS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/photos_processed'
-    OUTPUT_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/sg_cards_dataset'
+    OUTPUT_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/dataset'
 
-    number_of_images = 10
+    number_of_images = 50000
     max_number_of_cards_per_image = 4
     min_size = 0.2
     max_size = 0.7

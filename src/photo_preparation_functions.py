@@ -60,7 +60,7 @@ def process_photos(PHOTOS_DIR):
 
 if __name__ == '__main__':
     # input parameters
-    PHOTOS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/sg_card_photos'
+    PHOTOS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/photos_small'
 
     # do processing
     PLAYING_CARD_DIR = process_photos(PHOTOS_DIR)
