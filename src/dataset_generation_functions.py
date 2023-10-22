@@ -5,6 +5,7 @@ import random as rand
 import imutils
 import numpy as np
 import photo_preparation_functions as ppf
+from tqdm import tqdm
 
 
 def overlay_images(image, card, mask, bounding_box):
@@ -224,17 +225,14 @@ def generate_dataset(BACKGROUNDS_DIR, PLAYING_CARDS_DIR, OUTPUT_DIR, number_of_i
     create_dataset_dir(OUTPUT_DIR)
     classes_dict = generate_yaml_file(PLAYING_CARDS_DIR, OUTPUT_DIR)
 
-    for i in range(number_of_images):
+    for i in tqdm(range(number_of_images)):
         background = select_background(BACKGROUNDS_DIR)
         number_of_cards_per_image = rand.randint(1, max_number_of_cards_per_image)
         cards, names = select_cards(PLAYING_CARDS_DIR, number_of_cards_per_image)
         card_classes = [classes_dict[name] for name in names]
         image, labels = place_cards(background, cards, card_classes, max_size, min_size, max_rotation, overlapping)
 
-        if(i%500 == 0):
-            print(i)
-
-        if(i > 0.8*number_of_images):
+        if(i >= 0.8*number_of_images):
             folder = '/val'
         cv.imwrite(OUTPUT_DIR + folder + f'/images/{i}.jpg', image)
         with open(OUTPUT_DIR + folder + f'/labels/{i}.txt', 'w') as file:
