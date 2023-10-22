@@ -61,11 +61,10 @@ def generate_yaml_file(PLAYING_CARDS_DIR, OUTPUT_DIR):
     classes_dict = dict((name, i) for i, name in enumerate(unique_card_names))
     number_of_classes = len(unique_card_names)
 
-    with open(OUTPUT_DIR + '/classes.yaml', 'w') as file:
-        file.write('classes:\n')
-        for card_name in unique_card_names:
-            file.write('- ' + card_name + '\n')
-        file.write(f'nc: {number_of_classes}')
+    with open(OUTPUT_DIR + '/data.yaml', 'w') as file:
+        file.write('names:\n')
+        for i, card_name in enumerate(unique_card_names):
+            file.write(f'  {i}: {card_name}\n')
     return classes_dict
 
 
@@ -85,7 +84,7 @@ def select_cards(PLAYING_CARDS_DIR, number_of_cards):
     card_paths = [str(path) for path in Path(PLAYING_CARDS_DIR).glob('*')]
     selected_cards_paths = rand.sample(card_paths, number_of_cards)
     selected_cards = [cv.imread(path) for path in selected_cards_paths]
-    selected_cards_names = [card_path.split('/')[-1].split('_')[0] for card_path in selected_cards_paths]
+    selected_cards_names = [card_path.split('/')[-1].split('.')[0] for card_path in selected_cards_paths]
     return selected_cards, selected_cards_names
 
 
@@ -249,7 +248,7 @@ def generate_dataset(BACKGROUNDS_DIR, PLAYING_CARDS_DIR, OUTPUT_DIR, number_of_i
 if __name__ == '__main__':
     #input parameters
     BACKGROUNDS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/dtd'
-    PLAYING_CARDS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/sg_card_photos_processed'
+    PLAYING_CARDS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/photos_processed'
     OUTPUT_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/sg_cards_dataset'
 
     number_of_images = 10
