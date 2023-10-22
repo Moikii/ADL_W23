@@ -55,7 +55,7 @@ def create_dataset_dir(OUTPUT_DIR):
 
 
 def generate_yaml_file(PLAYING_CARDS_DIR, OUTPUT_DIR):
-    card_names = [frame_name.split('_')[0] for frame_name in os.listdir(PLAYING_CARDS_DIR)]
+    card_names = [frame_name.split('.')[0] for frame_name in os.listdir(PLAYING_CARDS_DIR)]
     unique_card_names = list(set(card_names))
     unique_card_names.sort()
     classes_dict = dict((name, i) for i, name in enumerate(unique_card_names))

@@ -1,0 +1,42 @@
+path: '/content/content/MyDrive/uni/ADL/dataset_test' # dataset root dir
+train: train/images  # train images (relative to 'path')
+val: val/images  # val images (relative to 'path')
+
+# Classes
+names:
+  0: e10
+  1: e6
+  2: e7
+  3: e8
+  4: e9
+  5: ea
+  6: ek
+  7: eo
+  8: eu
+  9: h10
+  10: h6
+  11: h7
+  12: h8
+  13: h9
+  14: ha
+  15: hk
+  16: ho
+  17: hu
+  18: l10
+  19: l6
+  20: l7
+  21: l8
+  22: l9
+  23: la
+  24: lk
+  25: lo
+  26: lu
+  27: s10
+  28: s6
+  29: s7
+  30: s8
+  31: s9
+  32: sa
+  33: sk
+  34: so
+  35: su
