@@ -2,6 +2,7 @@ import cv2 as cv
 from pathlib import Path
 import os
 import numpy as np
+from tqdm import tqdm
 
 
 
@@ -47,20 +48,20 @@ def create_playing_card_dir(photo_DIR):
 def process_photos(PHOTOS_DIR):
     PLAYING_CARDS_DIR = create_playing_card_dir(PHOTOS_DIR)
     photo_paths = [str(path) for path in Path(PHOTOS_DIR).glob('*')]
-
-    for photo_path in photo_paths:
+    print(f'Processing {len(photo_paths)} input photos...')
+    for photo_path in tqdm(photo_paths):
             photo = cv.imread(photo_path)
             card = crop_image(photo)
             save_image(photo_path, PLAYING_CARDS_DIR, card)
 
-    print(f'Processed cards saved at: ' + PLAYING_CARDS_DIR)
+    print(f'Finished processing. Playing cards saved at: {PLAYING_CARDS_DIR}!')
     return PLAYING_CARDS_DIR
 
 
 
 if __name__ == '__main__':
     # input parameters
-    PHOTOS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/photos_small'
+    PHOTOS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/photos'
 
     # do processing
     PLAYING_CARD_DIR = process_photos(PHOTOS_DIR)

@@ -190,10 +190,6 @@ def get_adjusted_bounding_box_and_card_and_mask(proposed_bounding_box, card, mas
     return (adjusted_x_pos, adjusted_y_pos, adjusted_width, adjusted_height), adjusted_card, adjusted_mask
 
 
-def get_relative_bounding_box(x_pos, y_pos, card_width, card_height, image_width, image_height):
-    return
-
-
 def place_card(image, card, mask, overlapping, bounding_boxes):
     card_placed = False
     max_tries = 50
@@ -218,13 +214,16 @@ def place_card(image, card, mask, overlapping, bounding_boxes):
 
 
 
-def generate_dataset(BACKGROUNDS_DIR, PLAYING_CARDS_DIR, OUTPUT_DIR, number_of_images, max_number_of_cards_per_image,
+def generate_dataset(BACKGROUNDS_DIR, PHOTOS_DIR, OUTPUT_DIR, number_of_images, max_number_of_cards_per_image,
                      min_size, max_size, max_rotation, overlapping, seed):
+    PLAYING_CARDS_DIR = ppf.process_photos(PHOTOS_DIR)
+
     rand.seed(seed)
     folder = '/train'
     create_dataset_dir(OUTPUT_DIR)
     classes_dict = generate_yaml_file(PLAYING_CARDS_DIR, OUTPUT_DIR)
 
+    print(f'Generating {number_of_images} dataset images...')
     for i in tqdm(range(number_of_images)):
         background = select_background(BACKGROUNDS_DIR)
         number_of_cards_per_image = rand.randint(1, max_number_of_cards_per_image)
@@ -238,7 +237,7 @@ def generate_dataset(BACKGROUNDS_DIR, PLAYING_CARDS_DIR, OUTPUT_DIR, number_of_i
         with open(OUTPUT_DIR + folder + f'/labels/{i}.txt', 'w') as file:
             file.write(labels)
 
-    print('Dataset generated and saved at: ' + OUTPUT_DIR)
+    print(f'Dataset generated and saved at: {OUTPUT_DIR}!')
     return OUTPUT_DIR
 
 
@@ -248,10 +247,10 @@ def generate_dataset(BACKGROUNDS_DIR, PLAYING_CARDS_DIR, OUTPUT_DIR, number_of_i
 if __name__ == '__main__':
     #input parameters
     BACKGROUNDS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/dtd'
-    PLAYING_CARDS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/photos_processed'
+    PHOTOS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/photos'
     OUTPUT_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/dataset'
 
-    number_of_images = 50000
+    number_of_images = 100
     max_number_of_cards_per_image = 4
     min_size = 0.2
     max_size = 0.7
@@ -260,7 +259,7 @@ if __name__ == '__main__':
     seed = 42
     
     # generate dataset
-    generate_dataset(BACKGROUNDS_DIR, PLAYING_CARDS_DIR, OUTPUT_DIR, number_of_images, max_number_of_cards_per_image,
+    generate_dataset(BACKGROUNDS_DIR, PHOTOS_DIR, OUTPUT_DIR, number_of_images, max_number_of_cards_per_image,
                      min_size, max_size, max_rotation, overlapping, seed)
 
 
