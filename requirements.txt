@@ -3,3 +3,5 @@ imutils
 requests
 imgaug
 ultralytics
+gdown
+streamlit
