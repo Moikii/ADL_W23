@@ -18,25 +18,56 @@ game_running = False
 beginning_player = 0
 
 
+if 'disabled' not in st.session_state:
+    st.session_state.disabled = False
+
+if 'turned_on' not in st.session_state:
+    st.session_state.turned_on = False
+
+
 
 st.title('SHEL Demo: Playing card recognition using YOLO')
-trump_input = st.selectbox('Trump in this round:',('Schelle', 'Herz', 'Eichel', 'Laub'))
+
+
+trump_input = st.selectbox('Trump in this round:',('Schelle', 'Herz', 'Eichel', 'Laub'), disabled = st.session_state.disabled)
 trump = trump_input.lower()[0]
-number_of_players = st.number_input('Number of players:', 2, 6, step = 1) #on_change
-camera_url = st.text_input('Address displayed in IP Webcam:', 'http://192.168.178.39:8080') + '/shot.jpg'
-show_camera = st.checkbox('Show camera:')
+number_of_players = st.number_input('Number of players:', 2, 6, step = 1, disabled = st.session_state.disabled)
+camera_url_input = st.text_input('Address displayed in IP Webcam:', 'http://192.168.178.39:8080', disabled = st.session_state.disabled)
+camera_url = camera_url_input  + '/shot.jpg'
+show_camera = st.checkbox('Show camera:', value = st.session_state.turned_on, disabled = st.session_state.disabled)
+
+placeholder = st.empty()
+players_dict = dict([(f'Player {i+1}', 0) for i in range(number_of_players)])
+placeholder.dataframe(players_dict)
+
+def start_game():
+    st.session_state.turned_on = True
+    st.session_state.disabled = True
+
+def reset_game():
+    st.session_state.disabled = False
+    st.session_state.turned_on = False
 
 
-if st.button('Start Game!'):
-    print('game started')
-    show_camera = True
+if st.button('Start Game!', disabled = st.session_state.disabled, on_click = start_game):
+    print('Game started!')
     game_running = True
-    players_dict = dict([(f'Player {i+1}', 0) for i in range(number_of_players)])
-    #todo disable inputs
-
 
 
 FRAME_WINDOW = st.image([])
+
+if st.button('Reset Game', disabled = not st.session_state.disabled, on_click = reset_game):
+    print('Game resetted!')
+    before_detected_cards = list()
+    currently_detected_cards = set()
+    already_played_cards = set()
+    current_play = list()
+    game_running = False
+    beginning_player = 0
+    players_dict = dict([(f'Player {i+1}', 0) for i in range(number_of_players)])
+    placeholder.dataframe(players_dict)
+
+
 
 while show_camera:
     img_resp = requests.get(camera_url) 
@@ -55,13 +86,24 @@ while show_camera:
             already_played_cards.add(card)
             current_play.append(card)
             if len(current_play) == number_of_players:
-                current_score, beginning_player = jass.add_points_from_play(players_dict, beginning_player, current_play, trump, len(already_played_cards))
-                print(current_play)
-                print(current_score)
+                print(f'Cards from current play (starting with player {beginning_player + 1}): {current_play}')
+                players_dict, beginning_player = jass.add_points_from_play(players_dict, beginning_player, current_play,
+                                                                            trump, len(already_played_cards), number_of_players)
+                placeholder.dataframe(players_dict)
                 current_play = list()
             
     if (36 -len(already_played_cards)) < number_of_players:
+        st.warning(f'{max(players_dict, key = players_dict.get)} wins!', icon = '🔥')
+        print('Game resetted!')
+        before_detected_cards = list()
+        currently_detected_cards = set()
+        already_played_cards = set()
+        current_play = list()
         game_running = False
+        beginning_player = 0
+        players_dict = dict([(f'Player {i+1}', 0) for i in range(number_of_players)])
+        placeholder.dataframe(players_dict)
+        st.button('Ok', on_click = reset_game())
 
 
     if len(before_detected_cards) > 40:
