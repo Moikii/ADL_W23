@@ -237,7 +237,7 @@ def generate_dataset(BACKGROUNDS_DIR, PHOTOS_DIR, OUTPUT_DIR, number_of_images, 
         with open(OUTPUT_DIR + folder + f'/labels/{i}.txt', 'w') as file:
             file.write(labels)
 
-    print(f'Dataset generated and saved at: {OUTPUT_DIR}!')
+    print(f'Dataset generated and saved at: "{OUTPUT_DIR}"!')
     return OUTPUT_DIR
 
 
@@ -263,6 +263,7 @@ if __name__ == '__main__':
                      min_size, max_size, max_rotation, overlapping, seed)
 
 
+#todo test split?
 
 
 

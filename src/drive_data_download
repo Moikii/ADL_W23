@@ -1,8 +1,9 @@
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id='$1 -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id="$1 -O data.zip && rm -rf /tmp/cookies.txt
-unzip data.zip -d './'$2
-rm data.zip
+unzip data.zip -d './'$2 > /dev/null
+rm data.zip > /dev/null
 
 # alternative IDs
 # backgrounds_id = '1KHAYHo9voKRUWtff5ES07hBRUmT7vSg5'
 # photos_ids = ['1o0f3q5zJzfRXs9vSMb1uR9KcUfWtFItZ', '1Ot7kAToB1YTSraS3hgbw9zBHDmHtZhpj']
 # dataset_ids = ['11cMzPUd_ETyOzzb0iJMtONWP10Nu7Zwc', '1o6z8eRo0pKg9IXQR80-E8p7XvwQMXLwX']
+# runs_id = '1DJ2CTQTFUvKljhlD2Kn9X0tpTOx8w8cG' 

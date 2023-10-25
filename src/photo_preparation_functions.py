@@ -54,7 +54,7 @@ def process_photos(PHOTOS_DIR):
             card = crop_image(photo)
             save_image(photo_path, PLAYING_CARDS_DIR, card)
 
-    print(f'Finished processing. Playing cards saved at: {PLAYING_CARDS_DIR}!')
+    print(f'Finished processing. Playing cards saved at: "{PLAYING_CARDS_DIR}"!')
     return PLAYING_CARDS_DIR
 
 

@@ -6,6 +6,17 @@ from ultralytics import YOLO
 
 # Replace the below URL with your own. Make sure to add "/shot.jpg" at last.
 url = "http://192.168.178.39:8080/shot.jpg"
+
+
+
+#!pip install gdown
+# import gdown
+
+# url = 'https://drive.google.com/drive/folders/1PXkRJt6-O8OzxIaAT3mvSRqq0aJXoRbB?usp=sharing'
+# output_path = '/content/runs_testtt'
+# gdown.download_folder(url, output = output_path, quiet=False)
+
+
 model = YOLO('/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/models/large_dataset_best_1.pt')
 
 
