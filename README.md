@@ -15,9 +15,9 @@ In this part a dataset generation and model training pipeline will be implemente
 
 
 ### Assignment 3
-The final part of the assignment is to deploy the model in an application. Because of no previous experience and the complexity of the application using a live video feed, we stick to a local application that can be run as a python script in the terminal. The [final report](./assignments/SHEL_final_report) for this project contains more details to the implementation.
+The final part of the assignment is to deploy the model in an application. We try to build a [Streamlit Application](https://streamlit.io/). The [final report](./assignments/SHEL_final_report) for this project contains more details to the implementation.
 
-The usage of the application is described in the section below.
+The installation and usage of the application is described in the section below.
 
 ## Usage of Application
 

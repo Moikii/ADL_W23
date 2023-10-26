@@ -1,9 +1,17 @@
+'''
+This file contains functions that are used to process the input photos.
+The cards need to be cropped so they can then be placed on a background
+in the second step.
+This is done be detecting the outer edges of a card, filling the inner area,
+which leaves us with a mask we can use to distinguish card and background.
+The images are saved in a separate folder for further use.
+'''
+
 import cv2 as cv
 from pathlib import Path
 import os
 import numpy as np
 from tqdm import tqdm
-
 
 
 def find_edges(img):
@@ -18,18 +26,19 @@ def create_mask(img):
     filled_card = cv.fillPoly(edged_img.copy(), [max(contours, key = cv.contourArea)], color = (255, 255, 255))
     _, mask = cv.threshold(filled_card, thresh= 180, maxval = 255, type = cv.THRESH_BINARY)
     kernel = np.ones((5,5), np.uint8)
-    eroded_mask = cv.erode(mask, kernel)
+    eroded_mask = cv.erode(mask, kernel) # erode mask to remove single white pixels in background
     return eroded_mask
 
 
 def crop_image(img):
+    # resizing image to get rougher edges with no interruptions in next step
     img = cv.resize(img, (500, 600))
     mask = create_mask(img)
+    # keep card, make background black
     img = cv.bitwise_and(img, img, mask = mask)
-    x, y, w, h = cv.boundingRect(mask)    
+    x, y, w, h = cv.boundingRect(mask)
+    # add 5 pixels to each edge, to ensure the whole card is still in the image (otherwise problems occured while placing them on background)
     cropped_img = img[y-5:y+h+5, x-5:x+w+5]
-
-    
     return cropped_img
 
 
@@ -53,7 +62,6 @@ def process_photos(PHOTOS_DIR):
             photo = cv.imread(photo_path)
             card = crop_image(photo)
             save_image(photo_path, PLAYING_CARDS_DIR, card)
-
     print(f'Finished processing. Playing cards saved at: "{PLAYING_CARDS_DIR}"!')
     return PLAYING_CARDS_DIR
 

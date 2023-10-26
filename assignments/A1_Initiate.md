@@ -8,7 +8,7 @@ Playing card detection is a specific topic in the area of computer vision and th
 
 The main part of this project will be to generate a suitable dataset for neural network training for Single German playing cards. This dataset will then be used to fine-tune a pre-trained model, that is able to detect multiple objects in an image very fast. In the end we should be able to place multiple playing cards under a camera and let the program detect the position using bounding boxes and also the suit and value of the card.
 
-Wether detection in different rotations of a card and partially overlapping cards is possible, will be interesting to see. This is because unlike poker cards, Single German playing cards are not symmetrical and even more important, they do not have their suit and value written in the corners. This makes classification of overlapping cards much more difficult and is therefore not a main goal of the project.
+Whether detection in different rotations of a card and partially overlapping cards is possible, will be interesting to see. This is because unlike poker cards, Single German playing cards are not symmetrical and even more important, they do not have their suit and value written in the corners. This makes classification of overlapping cards much more difficult and is therefore not a main goal of the project.
 
 To wrap up the whole project, this playing card detection model will be integrated into an application, that is able to detect playing cards from a live webcam, and if enough time is available, also track a whole game and calculate the scores for each player.
 
