@@ -10,6 +10,7 @@ from ultralytics import YOLO
 from ultralytics.utils.plotting import Annotator
 import streamlit as st
 import jass_rules as jass
+import download_best_model as dbm
 
 
 # initialize global variables
@@ -21,10 +22,8 @@ current_play = list()
 beginning_player = 0
 
 
-
-MODEL_PATH = str(os.getcwd()) + '/models/best.pt'
+MODEL_PATH = dbm.get_model()
 model = YOLO(MODEL_PATH)
-#model = YOLO('/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/models/best.pt')
 
 
 def start_game():

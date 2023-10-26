@@ -11,14 +11,28 @@ The first assignmet was to find a fitting project for this course and to gather 
 
 
 ### Assignment 2
-In this part a dataset generation and model training pipeline will be implemented. We set ourselves a performance goal and try to reach it be fine-tuning dataset and model parameters. A final evaluation of different models gives us insight in the impact of various parameters on the model performance. The submission with the details can be found in [A2_Hacking.md](./assignments/A2_Hacking.md).
+In this part a dataset generation and model training pipeline will be implemented. We set ourselves a performance goal and try to reach it be fine-tuning dataset and model parameters. A final evaluation of different models gives us insight in the impact of various parameters on the model performance. The submission with the details can be found in [A2_Hacking.md](./assignments/A2_Hacking.md). **The training was done with Google Colab, therefore the [Jupyter Notebook](src/pipeline.ipynb) contains code that can only be run there and not locally!**
 
 
 ### Assignment 3
-The final part of the assignment is to deploy the model in an application. We try to build a [Streamlit Application](https://streamlit.io/). The [final report](./assignments/SHEL_final_report) for this project contains more details to the implementation.
+The final part of the assignment is to deploy the model in an application. We try to build a [Streamlit Application](https://streamlit.io/). The [final report](./assignments/SHEL_final_report) wraps up the project, containing a documentation and final toughts.
 
 The installation and usage of the application is described in the section below.
 
 ## Usage of Application
 
-#todo
+### Requirements:
+To install and launch the application, Python and Git must be installed on your machine.
+
+### Launch application
+To install and run the application, run the following commands in a terminal, that is opened in the location where you want the app downloaded:
+
+```
+git clone https://github.com/Moikii/SHEL.git
+cd SHEL
+. launch_app
+```
+
+
+
+    
