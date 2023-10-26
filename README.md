@@ -32,6 +32,7 @@ git clone https://github.com/Moikii/SHEL.git
 cd SHEL
 . launch_app
 ```
+Using Streamlit to deploy the app did not work with our implementation, because we use a IP-Camera, that is only connected to the local network. Rewriting the code to make it work online would take up too much time at this point. Additionally we do not have a external webcam at hand to capture the videos from a nice angle, which is the reason we went with the phone camera as IP-Webcam in the first place.
 
 
 

@@ -11,7 +11,6 @@ def download_from_drive(BEST_MODEL_PATH):
 
 def get_model():
     MODELS_DIR = str(os.getcwd()) + '/models'
-    print(MODELS_DIR)
     BEST_MODEL_PATH = MODELS_DIR + '/best.pt'
 
     if not os.path.exists(MODELS_DIR):

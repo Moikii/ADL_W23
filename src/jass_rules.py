@@ -2,15 +2,15 @@
 Functions to decide which player won a current play, and how much points he gets.
 '''
 
-card_values_ascending = ['6', '7', '8', '9', '1', 'u', 'o', 'k', 'a']
-card_trump_values_ascending = ['6', '7', '8', '1', 'o', 'k', 'a', '9', 'u']
+card_values_ascending = ['6', '7', '8', '9', 'x', 'u', 'o', 'k', 'a']
+card_trump_values_ascending = ['6', '7', '8', 'x', 'o', 'k', 'a', '9', 'u']
 
 
 def get_points(current_play, trump, number_of_played_cards, number_of_players):
     points = 0
     for card in current_play:
         match card[1]:
-            case '1':
+            case 'x':
                 points += 10
             case 'u':
                 if card[0] == trump:

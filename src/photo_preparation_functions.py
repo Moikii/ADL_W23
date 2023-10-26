@@ -32,7 +32,9 @@ def create_mask(img):
 
 def crop_image(img):
     # resizing image to get rougher edges with no interruptions in next step
-    img = cv.resize(img, (500, 600))
+    height, width, _ = img.shape
+    #print(int(height/8),int(width/8))
+    img = cv.resize(img, (int(width/4), int(height/4)))
     mask = create_mask(img)
     # keep card, make background black
     img = cv.bitwise_and(img, img, mask = mask)

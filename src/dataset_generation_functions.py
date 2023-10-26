@@ -254,7 +254,7 @@ if __name__ == '__main__':
     PHOTOS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/photos'
     OUTPUT_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/dataset'
 
-    number_of_images = 100
+    number_of_images = 60000
     max_number_of_cards_per_image = 4
     min_size = 0.2
     max_size = 0.7
