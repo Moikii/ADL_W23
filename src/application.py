@@ -2,12 +2,10 @@
 This file contains the code to run a small demo-application using Streamlit. How to launch the
 application is described in the README.md.
 '''
-
+import os
 import requests
 import cv2 as cv
 import numpy as np
-import imutils
-import gdown
 from ultralytics import YOLO
 from ultralytics.utils.plotting import Annotator
 import streamlit as st
@@ -21,8 +19,12 @@ currently_detected_cards = set()
 already_played_cards = set()
 current_play = list()
 beginning_player = 0
-model = YOLO('/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/models/best.pt')
-#todo path relative
+
+
+
+MODEL_PATH = str(os.getcwd()) + '/models/best.pt'
+model = YOLO(MODEL_PATH)
+#model = YOLO('/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/models/best.pt')
 
 
 def start_game():
