@@ -22,11 +22,12 @@ The installation and usage of the application is described in the section below.
 ## Usage of Application
 
 ### Requirements:
-To install and launch the application, Python and Git must be installed on your machine.
+To install and launch the application, Python and Git must be installed on your machine. Also the app 'IP Webcam' should be installed on your phone, to connect the camera with the desktop application.
 
 ### Launch application
 To install and run the application, run the following commands in a terminal, that is opened in the location where you want the app downloaded:
 
+todo: dockerize
 ```
 git clone https://github.com/Moikii/SHEL.git
 cd SHEL
