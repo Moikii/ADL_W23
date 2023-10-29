@@ -18,7 +18,8 @@ RUN apt-get install 'ffmpeg'\
     'libsm6'\
     'libxext6'  -y
 
-RUN git clone https://github.com/moikii/shel.git .
+COPY ./src /app/
+COPY requirements.txt /app/
 
 RUN pip3 install -r requirements.txt
 
@@ -26,5 +27,5 @@ EXPOSE 8501
 
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
-ENTRYPOINT ["streamlit", "run", "shel/src/application.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "/app/application.py", "--server.port=8501", "--server.address=0.0.0.0"]
 

@@ -1,10 +1,2 @@
-if [ ! -d .venv/ ]
-then
-    python -m venv .venv
-    . .venv/bin/activate
-    pip install -r requirements.txt
-    deactivate
-fi
-
-. .venv/bin/activate
-streamlit run ./src/application.py
+docker build -t shel .
+docker run -p 8501:8501 shel
