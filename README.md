@@ -19,10 +19,10 @@ The final part of the assignment is to deploy the model in an application. We tr
 
 The installation and usage of the application is described in the section below.
 
-## Usage of Application
+## Intall and use Application
 
 ### Requirements:
-To install and launch the application, docker must be installed on your machine. Also the app 'IP Webcam' should be installed on your phone, to connect the phone camera with the desktop application.
+To install and launch the application, docker must be installed on your machine. Also the app [IP Webcam](https://play.google.com/store/apps/details?id=com.pas.webcam) should be installed on your phone, to connect the phone camera with the desktop application.
 
 ### Launch application
 
@@ -39,14 +39,17 @@ docker run -p 8501:8501 shel
 - **Download an already build docker-image:** Run the application faster, the docker-image can be downloaded, and additionally launch the application with the commands below.
 
 ```
-#todo
+docker run -p 8501:8501 ghcr.io/moikii/shel:latest
 ```
 
 Using Streamlit to deploy the app did not work with our implementation, because we use a IP-Camera, that is only connected to the local network. Rewriting the code to make it work online would take up too much time at this point. Additionally we do not have a external webcam at hand to capture the videos from a nice angle, which is the reason we went with the phone camera as IP-Webcam in the first place. The video lags a bit, but dows not influence the predicitons of the model itself, just the user experience.
 
 
+### Use Application
 
-    
+To connect the IP Webcam, start the app, scroll to the bottom and tap *Start Sever*. On the screen appears the camera and some IP addresses. Enter the first IPv4 into the corresponding textfield in the desktop application and hit ENTER. The rest of the Streamlit app should be pretty selfexplainatory.
+
+
 
 
 #todo
