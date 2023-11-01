@@ -4,7 +4,7 @@ on: push
 
 jobs:
   build_and_publish:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Build and push the image
@@ -12,4 +12,3 @@ jobs:
           docker login --username moikii --password ${{ secrets.GH_PAT }} grcr.io
           docker build . --tag ghcr.io/moikii/shel:latest
           docker push ghcr.io/moikii/shel:latest
-          
