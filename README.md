@@ -22,19 +22,35 @@ The installation and usage of the application is described in the section below.
 ## Usage of Application
 
 ### Requirements:
-To install and launch the application, Python and Git must be installed on your machine. Also the app 'IP Webcam' should be installed on your phone, to connect the camera with the desktop application.
+To install and launch the application, docker must be installed on your machine. Also the app 'IP Webcam' should be installed on your phone, to connect the phone camera with the desktop application.
 
 ### Launch application
-To install and run the application, run the following commands in a terminal, that is opened in the location where you want the app downloaded:
 
-todo: dockerize
+We provide two options to run the application on your local machine:
+
+- **Build a new docker container:** To run the application, open a terminal in the cloned repository and execute the following commands. This might take a while, because the *ultralytics* package has a lot of dependencies that need to be installed.
+
 ```
-git clone https://github.com/Moikii/SHEL.git
-cd SHEL
-. launch_app
+docker build -t shel .
+docker run -p 8501:8501 shel
 ```
-Using Streamlit to deploy the app did not work with our implementation, because we use a IP-Camera, that is only connected to the local network. Rewriting the code to make it work online would take up too much time at this point. Additionally we do not have a external webcam at hand to capture the videos from a nice angle, which is the reason we went with the phone camera as IP-Webcam in the first place.
+
+
+- **Download an already build docker-image:** Run the application faster, the docker-image can be downloaded, and additionally launch the application with the commands below.
+
+```
+#todo
+```
+
+Using Streamlit to deploy the app did not work with our implementation, because we use a IP-Camera, that is only connected to the local network. Rewriting the code to make it work online would take up too much time at this point. Additionally we do not have a external webcam at hand to capture the videos from a nice angle, which is the reason we went with the phone camera as IP-Webcam in the first place. The video lags a bit, but dows not influence the predicitons of the model itself, just the user experience.
 
 
 
     
+
+
+#todo
+code commenting/documentation/usage/autoformat style code
+docker commands
+video
+report

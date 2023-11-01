@@ -252,13 +252,13 @@ if __name__ == '__main__':
     #input parameters
     BACKGROUNDS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/dtd'
     PHOTOS_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/photos'
-    OUTPUT_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/dataset_non_overlapping'
+    OUTPUT_DIR = '/home/moiki/Documents/Files/studies/4_Semester/ADL/ADL_W23/data/dataset_big'
 
-    number_of_images = 60000
-    max_number_of_cards_per_image = 4
-    min_size = 0.2
-    max_size = 0.7
-    overlapping = False
+    number_of_images = 1000
+    max_number_of_cards_per_image = 6
+    min_size = 0.1
+    max_size = 0.8
+    overlapping = True
     seed = 42
 
     # generate dataset

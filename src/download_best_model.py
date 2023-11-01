@@ -7,7 +7,7 @@ import gdown
 
 def download_from_drive(BEST_MODEL_PATH):
     print('Downloading trained YOLO model...')
-    gdown.download(id = '129Ptx55Ra_5j66cFbEza0ukrFgJfvi0S', output = BEST_MODEL_PATH)
+    gdown.download(id = '1py_SFvJWV5BLYJuIa6CYFhxhby12LCly', output = BEST_MODEL_PATH)
 
 def get_model():
     MODELS_DIR = str(os.getcwd()) + '/models'
