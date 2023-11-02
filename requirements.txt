@@ -1,11 +1,7 @@
-opencv-python
-matplotlib
-typing-extensions
-sympy
-pyyaml
-tqdm
-requests
-psutil
-gdown
+# requirements for a venv, to run locally
+
+ultralytics
 streamlit
-py-cpuinfo
+imutils
+imgaug
+gdown

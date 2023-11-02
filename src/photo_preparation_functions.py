@@ -26,7 +26,8 @@ def create_mask(img):
     filled_card = cv.fillPoly(edged_img.copy(), [max(contours, key = cv.contourArea)], color = (255, 255, 255))
     _, mask = cv.threshold(filled_card, thresh= 180, maxval = 255, type = cv.THRESH_BINARY)
     kernel = np.ones((5,5), np.uint8)
-    eroded_mask = cv.erode(mask, kernel) # erode mask to remove single white pixels in background
+    # erode mask to remove single white pixels in background
+    eroded_mask = cv.erode(mask, kernel)
     return eroded_mask
 
 

@@ -39,7 +39,7 @@ The dataset generation will be implemented in a way that makes it easy to genera
 The model we will be training is called [YOLO](https://browse.arxiv.org/pdf/1506.02640.pdf), that is currently one of the best models in detecting multiple objects in a single image in a very short amount of time. This makes it fitting for our task to detect multiple cards at once. Because the main focus of this project is to build our own dataset, we will not implement our own model to detect the playing cards, but are only going to fine-tune an existing one. Specifically, we try to use the newest version, YOLOv8 for this project.
 
 
-# Work-breakdown and schedule
+## Work-breakdown and schedule
 
 |Topic|Short description|Anticipated time in hours|
 |---|---|---|
@@ -51,7 +51,7 @@ The model we will be training is called [YOLO](https://browse.arxiv.org/pdf/1506
 |Test with live data|Test model with live data from a connected camera|5|
 |Application|Implement model into application, detect cards, keep score of players|18|
 
-# References
+## References
 
 The currently used papers and websites for reference and inspiration are can also be found gathered together in this [file](../references.md).
 

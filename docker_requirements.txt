@@ -1,0 +1,14 @@
+# necessary dependencies for building a docker image.
+# different from the regular requirements.txt because of a bloated docker image
+
+opencv-python
+matplotlib
+typing-extensions
+sympy
+pyyaml
+tqdm
+requests
+psutil
+gdown
+streamlit
+py-cpuinfo

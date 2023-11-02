@@ -2,7 +2,7 @@
 
 ## Information
 
-Due to no available local GPU, the training of the model is done on Google Colab. Because of this, the [Jupyter Notebook containing the pipeline](../src/pipeline.ipynb) **cannot be run locally**. The 
+Due to no available local GPU, the training of the model is done on Google Colab. Because of this, the [Jupyter Notebook containing the pipeline](../src/pipeline.ipynb) **cannot be run locally**.
 
 ## Used error metrics
 For the evaluation we focus on precision and recall as metrics. In our opinion, both of these aspects are equally important. To keep the correct scores, we need to detect all cards (high recall), but also have to classify them correctly (high precision). Based on the accuracy measurement provided in [the paper](https://arxiv.org/pdf/2109.11861.pdf), we **aim for a precision over 0.99 and a recall over 0.90** . Because the way our image generation works when allowing overlapping pictures, it may happen that a card is completely overlapped by another card, which makes it impossible to detect, leading to lower recall. We try to account for that, but do not know, whether this value is adjusted appropriately. We may also train models on images with no overlapping cards to check the difference.
@@ -29,12 +29,12 @@ We achieved the following values for our chosen error metrics:
 |---|---|---|---|---|
 |6,000|True|10|0.97032|0.9245|
 |6,000|False|10|0.90016|0.89837|
-|60,000|True|10|0.99256|0.97052|
+|60,000|True|10|**0.99256**|**0.97052**|
 |60,000|False|10|0.89694|0.89706|
 
 We can see that, against our expectations, the dataset with overlapping cards achieves higher values for precision and recall. Training on more data lead to better results for the overlapping case, while the plateau for non-overlapping cards is already reached with the 6000 image dataset. This can also be seen in the plots below.
 
-Additionally, we trained on a 60000 image dataset for 20 epochs, with varied card sizes (min_size = 0,1 max_size = 0,8). This lead to a precision of 0.99491 and recall of 0.9459. This is the best result regarding precision, but not for recall. We still ended up choosing this as the best model, because the lower recall can be explained with the larger range of card-sizes, because they lead to more completely covered cards than with the other parameters, but leaves us with a broader spectrum of card sizes, which also has influence on live predictions.
+Additionally, we trained on a 60000 image dataset for 20 epochs, with varied card sizes (min_size = 0,1 max_size = 0,8). This lead to a precision of 0.99491 and recall of 0.9459. This is the best result regarding precision, but not for recall. We still ended up choosing this as the model to deploy, because the lower recall can be explained with the larger range of card-sizes, because they lead to more completely covered cards than with the other parameters, but leaves us with a broader spectrum of card sizes, which also has influence on live predictions.
 
 Training time of the models was around 1 hour (2 hours for 20 epochs), using the V100 GPU, that is provided when using Google Colab Pro.
 
@@ -74,5 +74,5 @@ Below is the anticipated time and the actual (approximate) time spent on a task:
 |---|---|---|---|
 |Take videos|Create suitable setup, shoot videos|5|2|
 |Implement dataset generation|Strategy, find useful packages, implementing, testing, variable parameters, aim for minimal user input|25|30|
-|Model Training|Getting familiar with model, create setup for training and evaluation, train model, fine-tune with model parameters and dataset-generation parameters|15|30|
+|Model Training|Getting familiar with model, create setup for training and evaluation, train model, fine-tune with model parameters and dataset-generation parameters|15|35|
 |Test with live data|Test model with live data from a connected camera|1|1|

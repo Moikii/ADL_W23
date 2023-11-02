@@ -1,5 +1,5 @@
 '''
-Functions to decide which player won a current play, and how much points he gets.
+Functions to decide which player won a current play, and how much points the player gets.
 '''
 
 card_values_ascending = ['6', '7', '8', '9', 'x', 'u', 'o', 'k', 'a']

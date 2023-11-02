@@ -42,13 +42,21 @@ if 'input_disabled' not in st.session_state:
     
 
 # create user interface
-st.title('SHEL Demo: Playing card recognition using YOLO')
-trump_input = st.selectbox('Trump in this round:',('Schelle', 'Herz', 'Eichel', 'Laub'), disabled = st.session_state.input_disabled)
-trump = trump_input.lower()[0]
-number_of_players = st.number_input('Number of players:', 2, 6, step = 1, disabled = st.session_state.input_disabled)
+st.title('SHEL Demo: Single German playing card recognition using YOLO and Jass score keeper')
+
+st.header('Connect and Activate Camera')
+st.write('To connect the camera, download the [IP-Webcam](https://play.google.com/store/apps/details?id=com.pas.webcam) \
+         App on your phone, scroll to the bottom and tap "Start Server". Enter the IPv4 in the corresponding field below. \
+         An example of what the format should be is already given in the text field.')
+
 camera_url_input = st.text_input('Address displayed in IP Webcam:', 'http://192.168.178.39:8080', disabled = st.session_state.input_disabled)
 camera_url = camera_url_input  + '/shot.jpg'
 show_camera = st.checkbox('Show camera:', value = st.session_state.camera_turned_on, disabled = st.session_state.input_disabled)
+
+st.header('Specify game settings')
+trump_input = st.selectbox('Trump in this round:',('Schelle', 'Herz', 'Eichel', 'Laub'), disabled = st.session_state.input_disabled)
+trump = trump_input.lower()[0]
+number_of_players = st.number_input('Number of players:', 2, 6, step = 1, disabled = st.session_state.input_disabled)
 placeholder = st.empty()
 players_dict = dict([(f'Player {i+1}', 0) for i in range(number_of_players)])
 placeholder.dataframe(players_dict)
@@ -79,6 +87,7 @@ while show_camera:
     result = model(source = img, conf = 0.7, verbose = False)[0]
     # do score calculations when game is going on
     if game_running:
+        currently_detected_cards = set()
         for card_class in result.boxes.cls:
             card = model.names[int(card_class)]
             currently_detected_cards.add(card)
@@ -98,8 +107,8 @@ while show_camera:
                         st.warning(f'{max(players_dict, key = players_dict.get)} wins!', icon = '🔥')
                         game_running = False
         
-        # keep track of the detected cards in the last 40 frames
-        if len(before_detected_cards) > 40:
+        # keep track of the detected cards in the last 3 frames
+        if len(before_detected_cards) > 3:
             del before_detected_cards[0]
         before_detected_cards.append(currently_detected_cards)
 
