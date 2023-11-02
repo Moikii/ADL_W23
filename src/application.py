@@ -3,12 +3,12 @@ This file contains the code to run a small demo-application using Streamlit. How
 application is described in the README.md.
 '''
 import os
-import requests
-import cv2 as cv
-import numpy as np
 from ultralytics import YOLO
 from ultralytics.utils.plotting import Annotator
 import streamlit as st
+import requests
+import cv2 as cv
+import numpy as np
 import jass_rules as jass
 import download_best_model as dbm
 

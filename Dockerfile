@@ -1,27 +1,32 @@
 # app/Dockerfile
 
-FROM python:3.10
+FROM python:3.10-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    curl \
-    software-properties-common \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y \
+#     build-essential \
+#     curl \
+#     software-properties-common \
+#     git \
+#     && rm -rf /var/lib/apt/lists/*
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -y
 RUN apt install libgl1-mesa-glx -y
 RUN apt-get install 'ffmpeg'\
-    'libsm6'\
-    'libxext6'  -y
+   'libsm6'\
+   'libxext6'  -y
 
+ENV PYTHONDONTWRITEBYTECODE=1
+COPY pip.conf /etc/pip.conf
 COPY ./src /app/
 COPY requirements.txt /app/
 
+RUN pip3 install ultralytics --no-deps
+RUN pip3 install torch==2.1.0+cpu torchvision==0.16.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 RUN pip3 install -r requirements.txt
+
 
 EXPOSE 8501
 

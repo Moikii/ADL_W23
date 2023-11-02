@@ -36,7 +36,7 @@ docker run -p 8501:8501 shel
 ```
 
 
-- **Download an already build docker-image:** Run the application faster, the docker-image can be downloaded, and additionally launch the application with the commands below.
+- **Download an already build docker-image:** To run the application faster and not having to build it, the docker-image can be downloaded and launched with the commands below.
 
 ```
 docker run -p 8501:8501 ghcr.io/moikii/shel:latest
@@ -57,3 +57,11 @@ code commenting/documentation/usage/autoformat style code
 docker commands
 video
 report
+
+opencv-python
+imutils
+requests
+imgaug
+ultralytics
+gdown
+streamlit

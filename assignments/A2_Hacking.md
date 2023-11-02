@@ -34,7 +34,7 @@ We achieved the following values for our chosen error metrics:
 
 We can see that, against our expectations, the dataset with overlapping cards achieves higher values for precision and recall. Training on more data lead to better results for the overlapping case, while the plateau for non-overlapping cards is already reached with the 6000 image dataset. This can also be seen in the plots below.
 
-Additionally, we trained on a 60000 image dataset for 20 epochs, with varied card sizes (min_size = 0,1 max_size = 0,8). This lead to a precision of 0.99491 and recall of 0.9459. This is the best result regarding precision, but not for recall. We still ended up choosing this as the best model, because the lower recall can be explained with the larger range of card-sizes, because they lead to more completely covered cards than with the other parameters, but leaves us with a broader spectrum of card sizes, which also has influence on live predicitons.
+Additionally, we trained on a 60000 image dataset for 20 epochs, with varied card sizes (min_size = 0,1 max_size = 0,8). This lead to a precision of 0.99491 and recall of 0.9459. This is the best result regarding precision, but not for recall. We still ended up choosing this as the best model, because the lower recall can be explained with the larger range of card-sizes, because they lead to more completely covered cards than with the other parameters, but leaves us with a broader spectrum of card sizes, which also has influence on live predictions.
 
 Training time of the models was around 1 hour (2 hours for 20 epochs), using the V100 GPU, that is provided when using Google Colab Pro.
 

@@ -1,7 +1,11 @@
 opencv-python
-imutils
+matplotlib
+typing-extensions
+sympy
+pyyaml
+tqdm
 requests
-imgaug
-ultralytics
+psutil
 gdown
 streamlit
+py-cpuinfo
