@@ -113,7 +113,7 @@ while show_camera:
         before_detected_cards.append(currently_detected_cards)
 
     # due to visualizing with Streamlit, output image of model cannot be used and bounding boxes need to be added manually
-    color_list = [(212,255,127), (87,139,46), (128,0,0), (226,43,138), (143,143,188), (30,105,210), (222,196,176)]
+    color_list = [(87,139,46), (128,0,0), (226,43,138), (143,143,188), (30,105,210), (222,196,176)]
     annotator = Annotator(img)
     for i, label in enumerate(result.boxes.data):
         annotator.box_label(

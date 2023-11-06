@@ -42,4 +42,4 @@ The final part of the assignment is to deploy the model in an application. We tr
 
 How the app works and why we made certain design decisions, is described in [A3_Deliver](./assignments/A3_Deliver.md).
 
-Also, a short demo video is available on [Youtube](todo).
+Also, a short demo video is available on [Youtube](https://www.youtube.com/watch?v=WZPn0D6OPzg).
