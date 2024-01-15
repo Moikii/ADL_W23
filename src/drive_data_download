@@ -1,5 +1,3 @@
-# used to download data from drive into google colab. Works better than gdown for large files
-
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id='$1 -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id="$1 -O data.zip && rm -rf /tmp/cookies.txt
+gdown $1 -O data.zip
 unzip data.zip -d './'$2 > /dev/null
 rm data.zip > /dev/null

@@ -27,7 +27,7 @@ docker run -p 8501:8501 shel
 
 
 ## Running Tests
-To test the code using the implemented unittests, execute the following command in a terminal, opened in the root-directory of this project:
+To test the code using the implemented unittests, make sure you open a terminal in the virtual environment, with the installed depencencies from `requirements.txt`. Execute the following command with an active virtual environment, in a terminal opened in the root-directory of this project:
 
 ```
 python src/code_tests.py
