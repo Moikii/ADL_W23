@@ -17,8 +17,6 @@ COPY pip.conf /etc/pip.conf
 COPY ./src /app/
 COPY docker_requirements.txt /app/
 
-# install ultralytics and torch without dependencies and then only the necessary ones
-# result: docker image size went from 10.1GB to 2GB!
 RUN pip3 install ultralytics --no-deps
 RUN pip3 install torch==2.1.0+cpu torchvision==0.16.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 RUN pip3 install -r docker_requirements.txt

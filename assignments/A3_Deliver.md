@@ -1,6 +1,6 @@
 # SHEL: Dataset generation for Single German playing cards and object detection using YOLO
 
-## How does the application function?
+## How does the application work?
 We recoginze a card as played if it is detected in 3 frames in a row, to reduce false detections. When
 the number of detected cards is the same as the number of players, the winner can be determined. The cards are added
 to a list containing the used cards to avoid detecting cards again during the game.

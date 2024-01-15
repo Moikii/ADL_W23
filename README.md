@@ -4,11 +4,19 @@ In this project called SHEL (for Schelle, Herz, Eichel, Laub) for the course 'Ap
 ## Intall and use application
 
 ### Requirements:
-To install and launch the application, [Docker](https://www.docker.com/) must be installed on your machine. Also the app [IP Webcam](https://play.google.com/store/apps/details?id=com.pas.webcam) should be installed on your phone, to connect the phone camera with the desktop application.
+- Usage of Python version 3.10 is required.
+- To install and launch the application, [Docker](https://www.docker.com/) must be installed on your machine.
+- Also the app [IP Webcam](https://play.google.com/store/apps/details?id=com.pas.webcam) should be installed on your phone, to connect the phone camera with the desktop application.
 
 ### Launch application
 
 We provide two options to run the application on your local machine:
+
+- **Download an already build docker-image:** To run the application faster and not having to build it, the docker-image can be downloaded and launched from the Github Container Repository with the command below.
+
+```
+docker run -p 8501:8501 ghcr.io/moikii/shel:latest
+```
 
 - **Build a new docker container:** To run the application, open a terminal in the cloned repository and execute the following commands. This might take a while, because the *ultralytics* package has a lot of dependencies that need to be installed.
 
@@ -18,10 +26,11 @@ docker run -p 8501:8501 shel
 ```
 
 
-- **Download an already build docker-image:** To run the application faster and not having to build it, the docker-image can be downloaded and launched from the Github Container Repository with the command below.
+## Running Tests
+To test the code using the implemented unittests, execute the following command in a terminal, opened in the root-directory of this project:
 
 ```
-docker run -p 8501:8501 ghcr.io/moikii/shel:latest
+python src/code_tests.py
 ```
 
 ## Submissions for the Course
@@ -38,7 +47,7 @@ In this part a dataset generation and model training pipeline will be implemente
 
 
 ### Assignment 3
-The final part of the assignment is to deploy the model in an application. We try to build a [Streamlit Application](https://streamlit.io/). The [final report](./assignments/SHEL_final_report) wraps up the project, containing a documentation and final toughts.
+The final part of the assignment is to deploy the model in an application. We try to build a [Streamlit Application](https://streamlit.io/). The [final report](./assignments/A3_Report.pdf) wraps up the project, containing a documentation and final toughts.
 
 How the app works and why we made certain design decisions, is described in [A3_Deliver](./assignments/A3_Deliver.md).
 
